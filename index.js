@@ -73,14 +73,20 @@ async function run() {
         const database = client.db('simpleNode');
         const userCollection = database.collection('users')
         // const user = {name:"Abdul Kader", age: 23,}
-        // const result = await userCollection.insertOne(user);
         // console.log(result);
+        
 
-        app.post('/users', async (req,res)=>{
+        app.get('/users', (req, res) =>{
+            res.send(users)
+        })
+        
+        app.post('/users', async (req, res)=>{
             // console.log(req);
             const user = req.body;
             const result = await userCollection.insertOne(user);
             res.send(result);
+            console.log(result);
+            // console.log(user);
         })
     }
     finally{
@@ -96,9 +102,6 @@ app.get('/',(req, res) =>{
     res.send('second server is time to run');
 });
 
-app.get('/users', (req, res) =>{
-    res.send(users)
-})
 
 
 
